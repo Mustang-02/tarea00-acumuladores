@@ -44,6 +44,9 @@ public class Acumuladores {
 		return acum;
 	}
 	
+	
+	//-------- EJERCICIO 2 --------//
+	
 	/**
 	 * Dado 2 matrices se verifica si hay intersección entre las filas de cada
 	 * matriz, fila a fila.
@@ -55,8 +58,43 @@ public class Acumuladores {
 	 * @param mat2
 	 * @return
 	 */
+	
+	//-------- FUNCION PRINCIPAL --------//
+	
 	public boolean hayInterseccionPorFila(int[][] mat1, int[][]mat2) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+		// checkeo caso borde //
+		if(mat1.length == 0 || mat2.length == 0 || mat1.length != mat2.length) {
+			return false;
+		}
+		
+		boolean acum = true;
+		
+		for(int f = 0; f < mat1.length; f++) {
+			acum = acum && hayInterseccion(mat1,mat2,f);
+		}
+		return acum;
+	}
+	
+	//-------- FUNCION AUXILIAR (1)--------//
+	
+	public boolean hayInterseccion(int[][] mat1, int[][] mat2, int f) {
+		boolean acum = false;
+		
+		for( int col1 = 0; col1 < mat1[f].length; col1++) {
+			acum = acum || buscarMat2(mat1, mat2, f, col1);
+		}
+		return acum;
+	}
+	
+	//-------- FUNCION AUXILIAR (2)--------//
+	
+	public boolean buscarMat2(int[][] mat1, int[][] mat2, int f, int col1) {
+		boolean acum = false;
+		
+		for(int col2 = 0; col2 < mat2[f].length; col2++) {
+			acum = acum || mat1[f][col1] == mat2[f][col2];
+		}
+		return acum;
 	}
 	
 	/**
