@@ -97,6 +97,8 @@ public class Acumuladores {
 		return acum;
 	}
 	
+	//-------- EJERCICIO 3 --------//
+	
 	/**
 	 * Dada una matriz y el índice de una columna, se verifica si existe alguna
 	 * fila cuya suma de todos sus elementos sea mayor estricto que la suma de
@@ -109,8 +111,36 @@ public class Acumuladores {
 	 * @param nColum
 	 * @return
 	 */
-	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) {
+		// checkeo caso borde //
+		if(mat == null || mat.length == 0 || nColum < 0 || nColum >= mat[0].length) {
+			return false;
+		}
+		
+		int sumaCol = 0;
+		
+		for(int i = 0; i < mat.length; i++) {
+			sumaCol += mat[i][nColum];
+		}
+		
+		boolean acum = false;
+		
+		for(int f = 0; f < mat.length; f++) {
+			acum = acum || comparacionColFila(mat,f, sumaCol);
+		}
+		return acum;
+	}
+	
+	//-------- FUNCION AUXILIAR (1)--------//
+	
+	public boolean comparacionColFila(int[][] mat, int f, int sumaCol) {
+		
+		int sumaFila = 0;
+		
+		for(int c = 0; c < mat[f].length; c++) {
+			sumaFila += mat[f][c];
+		}
+		return sumaFila > sumaCol;
 	}
 	
 	/**
