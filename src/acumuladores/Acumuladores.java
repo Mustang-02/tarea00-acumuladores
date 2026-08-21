@@ -1,6 +1,8 @@
 package acumuladores;
 
 public class Acumuladores {
+	
+	//-------- EJERCICIO 1 --------//
 
 	/**
 	 * Dada una matriz de enteros y un número, verifica si existe alguna fila 
@@ -13,8 +15,33 @@ public class Acumuladores {
 	 * @param num
 	 * @return
 	 */
+	
+	//-------- FUNCION PRINCIPAL --------//
+	
 	public boolean todosMultiplosEnAlgunaFila(int[][] mat, int num) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+		
+		//Checkeo caso borde//
+		if (mat == null || num < 1) {
+			return false;
+		}
+		
+		boolean acum = false;
+		
+		for (int f=0; f < mat.length; f++) {
+			acum = acum || esMultiplo(mat, f, num);
+		}
+		return acum;
+	}
+	
+	//-------- FUNCION AUXILIAR --------//
+	
+	static boolean esMultiplo(int[][] mat, int f, int num) {
+		boolean acum = true;
+		
+		for(int c=0; c < mat[f].length; c++) {
+			acum = acum && (mat[f][c]) % num == 0;
+		}
+		return acum;
 	}
 	
 	/**
