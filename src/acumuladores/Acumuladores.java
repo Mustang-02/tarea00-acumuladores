@@ -111,6 +111,7 @@ public class Acumuladores {
 	 * @param nColum
 	 * @return
 	 */
+	
 	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) {
 		// checkeo caso borde //
 		if(mat == null || mat.length == 0 || nColum < 0 || nColum >= mat[0].length) {
@@ -143,6 +144,8 @@ public class Acumuladores {
 		return sumaFila > sumaCol;
 	}
 	
+	//-------- EJERCICIO 4 --------//
+	
 	/**
 	 * Dadas 2 matrices, se verifica si hay intersección entre las columnas de
 	 * cada matriz, columna a columna.
@@ -154,7 +157,45 @@ public class Acumuladores {
 	 * @param mat2
 	 * @return
 	 */
+	
 	public boolean hayInterseccionPorColumna(int[][] mat1, int[][]mat2) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+		// checkeo caso borde //
+		if(mat1.length == 0 || mat2.length == 0 || mat1[0].length != mat2[0].length) {
+			return false;
+		}
+		
+		boolean acum = true;
+		
+		for(int c = 0; c < mat1[0].length; c++) {
+			acum = acum && hayInterseccionCol(mat1, mat2, c);
+		}
+		return acum;
+	}
+	
+	//-------- FUNCION AUXILIAR (1)--------//
+	
+	public boolean hayInterseccionCol(int[][] mat1, int[][] mat2, int c) {
+		
+		boolean acum = false;
+		
+		for(int f1 = 0; f1 < mat1.length; f1++) {
+			if(c < mat1[f1].length) {
+			acum = acum || buscarFila2(mat1, mat2, c, f1);
+			}
+		}
+		return acum;
+	}
+	
+	//-------- FUNCION AUXILIAR (2)--------//
+	
+	public boolean buscarFila2(int[][] mat1, int[][] mat2, int c, int f1) {
+		boolean acum = false;
+		
+		for(int f2 = 0; f2 < mat2.length; f2++) {
+			if(c < mat2[f2].length) {
+			acum = acum || mat1[f1][c] == mat2[f2][c];
+			}
+		}
+		return acum;
 	}
 }
